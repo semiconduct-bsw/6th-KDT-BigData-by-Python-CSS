@@ -43,7 +43,3 @@ plt.ylabel('Value')
 plt.grid(True)
 
 plt.show()
-
-
-
-쉽게 분석해줘.
