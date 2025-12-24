@@ -15,3 +15,10 @@ class American(Human):
         super().__init__('미국', gender)
         self.name = name
         self.age = age
+
+korean = Korean('홍길동', 20, '남자')
+american = American('John Doe', 25, '여자')
+
+print(korean.country)
+print(korean.name)
+print(korean.age)
