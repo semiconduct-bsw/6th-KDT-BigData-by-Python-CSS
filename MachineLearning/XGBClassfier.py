@@ -1,4 +1,6 @@
 import xgboost as xgb
+import joblib
+import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
@@ -31,3 +33,14 @@ y_pred = model.predict(X_test)
 # 6. 평가
 print("정확도:", accuracy_score(y_test, y_pred))
 print("\n분류 리포트:\n", classification_report(y_test, y_pred, target_names=iris.target_names))
+
+# 7. 모델 저장
+joblib.dump(model, 'model/iris_xgb_model.pkl')
+
+# 8. 모델 로드
+model = joblib.load('model/iris_xgb_model.pkl')
+
+# 9. 임의의 값으로 예측
+X_new = np.array([[5.1, 3.5, 1.4, 0.2]])
+y_pred = model.predict(X_new)
+print("예측 결과:", y_pred)
