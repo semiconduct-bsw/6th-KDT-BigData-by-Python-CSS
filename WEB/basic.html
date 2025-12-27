@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Page</title>
+    <style>
+        .info-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1. 전체 내용을 감싸는 메인 컨테이너 div -->
+    <div class="main-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+
+        <!-- 2. 제목 영역 div -->
+        <div class="header-section" style="text-align: center; margin-bottom: 30px;">
+            <h2>안녕하세요!</h2>
+            <div class="sub-text" style="color: gray;">div 태그 활용 예제입니다.</div>
+        </div>
+
+        <!-- 3. 컨텐츠 목록을 감싸는 div (그리드나 리스트 형태) -->
+        <div class="content-wrapper">
+
+            <!-- 카드 1 -->
+            <div class="info-card"
+                style="border: 1px solid #c3e6cb; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: linear-gradient(135deg, #f0fff4, #d4edda);">
+                <div class="card-title" style="font-weight: bold; margin-bottom: 5px;">기본 구조</div>
+                <p>div 안에 p 태그를 넣어 텍스트를 감쌌습니다.</p>
+            </div>
+
+            <!-- 카드 2 -->
+            <div class="info-card"
+                style="border: 1px solid #b8daff; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: linear-gradient(135deg, #f0f7ff, #cce5ff);">
+                <div class="card-title" style="font-weight: bold; margin-bottom: 5px;">사용법</div>
+                <p>div는 여러 요소를 하나로 묶어 스타일을 주기 좋습니다.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
