@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>기본 구조</title>
+</head>
+
+<body>
+    안녕하세요
+    <!-- 부모 컨테이너: 박스들을 가로로 나열하기 위해 flex 사용 -->
+    <div style="padding: 10px; width: 400px; height: 400px;
+        background: yellow; display: flex; flex-wrap: wrap; align-content: flex-start;">
+
+        <!-- 0부터 9까지 10번 반복 -->
+        {% for i in range(32) %}
+        <!-- 짝수(0,2,4..)는 빨강, 홀수(1,3,5..)는 파랑 -->
+        <div style="width: 50px; height: 50px; background: {{ 'red' if i % 2 == 0 else 'blue' }};"></div>
+        {% endfor %}
+        {% for i in range(32) %}
+        <div style="width: 50px; height: 50px; background: {{ 'blue' if i % 2 == 0 else 'green' }};"></div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
