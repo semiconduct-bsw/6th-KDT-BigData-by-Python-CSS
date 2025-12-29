@@ -1,0 +1,35 @@
+from flask import Blueprint, render_template, request, jsonify
+import joblib
+import numpy as np
+
+bp = Blueprint('iris', __name__)
+
+# 모델 로드
+iris_model = joblib.load('model/iris_xgb_model.pkl')
+
+@bp.route("/predict-iris", methods=['GET', 'POST'])
+def predict_iris():
+    sepal_length = request.json.get("sepal_length")
+    sepal_width = request.json.get("sepal_width")
+    petal_length = request.json.get("petal_length")
+    petal_width = request.json.get("petal_width")
+
+    # 유효성 체크
+    if sepal_length is None or sepal_width is None or petal_length is None or petal_width is None:
+        return jsonify({
+            'success': False,
+            'message': '모든 값이 입력되어야 합니다.'
+        }), 400
+
+    # 임의의 값 예측
+    test_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
+    predict_class = iris_model.predict(test_data)
+
+    class_names = ['setosa', 'versicolor', 'virginica']
+    predicted_class_name = class_names[predict_class[0]]
+
+    return jsonify({
+        'success': True,
+        'message': 'Iris 예측 완료, 클래스 종류는 setosa, versicolor, virginica 중 하나입니다.',
+        'predicted_class_name': predicted_class_name
+    })
