@@ -9,6 +9,14 @@ def predict_iris():
     petal_width = request.json.get("petal_width")
     test_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
     predict_class = model.predict(test_data)
+
+    label_map = {
+        0: 'setosa',
+        1: 'versicolor',
+        2: 'virginica'
+    }
+    result_name = label_map.get(predict_class[0], "Unknown")
+
     print(predict_class)
     print(f"Predicted class: {predict_class[0]}")
-    return str(predict_class[0])
+    return result_name
