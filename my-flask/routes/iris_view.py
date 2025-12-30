@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 import joblib
 import numpy as np
+from db import get_conn
 
 bp = Blueprint('ai', __name__, url_prefix='/ai')
 
@@ -28,8 +29,24 @@ def predict_iris():
     class_names = ['setosa', 'versicolor', 'virginica']
     predicted_class_name = class_names[predict_class[0]]
 
-    return jsonify({
-        'success': True,
-        'message': 'Iris 예측 완료, 클래스 종류는 setosa, versicolor, virginica 중 하나입니다.',
-        'predicted_class_name': predicted_class_name
-    })
+    # 2. DB에 데이터 결과 및 저장
+    conn = None
+    try:
+        conn = get_conn()
+        cursor = conn.cursor()
+        cursor.execute("insert into `iris` (sepal_length, sepal_width, petal_length, petal_width, class_name, created_at) values (%s, %s, %s, %s, %s, now())", 
+        (sepal_length, sepal_width, petal_length, petal_width, predicted_class_name))
+
+        conn.commit()
+        conn.close()
+        return jsonify({
+            "success": True,
+            "message": "예측 완료, 클래스 종류는 setosa, versicolor, virginica 중 하나입니다.",
+            "예측된 클래스 종류": predicted_class_name
+        })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "message": "예측 실패",
+            "error": str(e)
+        }), 500
