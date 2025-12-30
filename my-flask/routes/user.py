@@ -6,6 +6,7 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 #회원 가입
 @bp.route("/save",methods=['POST'])
 def save_user():
+   print("==> [DEBUG] /user/save 요청이 들어왔습니다.")
    try:
       id = request.json['id']
       pw = request.json['pw']
@@ -21,15 +22,66 @@ def save_user():
          "user": {
             "id": id,
             "pw": pw,
-            "nick": nick,
-            "created_at": created_at
+            "nick": nick
          }
       })
    # 유효성 체크
    except Exception as e:
+      print(e)
       return jsonify({
          "success": False,
          "message": "회원 가입 실패",
+         "error": str(e)
+      }), 500
+
+# 닉네임 업데이트
+@bp.route("/update-nick", methods=['POST'])
+def update_nick():
+   print("==> [DEBUG] /user/update-nick 요청이 들어왔습니다.")
+   conn = None
+   try:
+      idx = request.json.get('idx')
+      nick = request.json.get('nick')
+      conn = get_conn()
+      cursor = conn.cursor()
+      cursor.execute("UPDATE `user` SET nick = %s WHERE idx = %s", (nick, idx))
+      conn.commit()
+      
+      return jsonify({
+         "success": True,
+         "message": "닉네임 수정 완료"
+      })
+   # 유효성 체크
+   except Exception as e:
+      print(f"Error: {e}")
+      return jsonify({
+         "success": False,
+         "message": "닉네임 수정 실패",
+         "error": str(e)
+      }), 500
+   finally:
+      if conn:
+         conn.close()
+
+# 회원 삭제
+@bp.route('/delete', methods=['POST'])
+def delete_user():
+   try:
+      idx = request.json.get('idx')
+      conn = get_conn()
+      cursor = conn.cursor()
+      cursor.execute("DELETE FROM `user` WHERE idx = %s", (idx,))
+      conn.commit()
+      conn.close()
+      return jsonify({
+         "success": True,
+         "message": "회원 삭제 완료"
+      })
+   except Exception as e:
+      print(e)
+      return jsonify({
+         "success": False,
+         "message": "회원 삭제 실패",
          "error": str(e)
       }), 500
 
