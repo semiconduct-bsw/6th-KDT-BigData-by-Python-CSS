@@ -15,3 +15,9 @@ SET
 WHERE idx=1
 
 DELETE FROM `user` WHERE idx=2
+
+UPDATE `user`
+SET
+	is_active='N'
+WHERE idx=3
+SELECT * FROM `user` WHERE is_active='Y'
