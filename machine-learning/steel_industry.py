@@ -6,11 +6,8 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
-<<<<<<< HEAD
 from sklearn.metrics import root_mean_squared_error
 import joblib
-=======
->>>>>>> 62d29281bae94c6414e407ebd0deaeeee33a664c
 
 # 1) 데이터 로딩
 df = pd.read_csv("data_res/Steel_industry_data.csv")
@@ -104,3 +101,4 @@ print(fi.head(20))
 # 필요하면 csv로 저장
 fi.to_csv("data_res/feature_importance_steel.csv", index=False)
 print("\n[저장] feature_importance_steel.csv 생성 완료")
+
