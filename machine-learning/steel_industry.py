@@ -6,8 +6,11 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, r2_score
+<<<<<<< HEAD
 from sklearn.metrics import root_mean_squared_error
 import joblib
+=======
+>>>>>>> 62d29281bae94c6414e407ebd0deaeeee33a664c
 
 # 1) 데이터 로딩
 df = pd.read_csv("data_res/Steel_industry_data.csv")
@@ -101,27 +104,3 @@ print(fi.head(20))
 # 필요하면 csv로 저장
 fi.to_csv("data_res/feature_importance_steel.csv", index=False)
 print("\n[저장] feature_importance_steel.csv 생성 완료")
-
-# 모델 저장
-joblib.dump(pipeline, "model/steel_industry_model.pkl")
-
-# 모델 로드
-steel_model = joblib.load("model/steel_industry_model.pkl")
-
-# 임의의 값 예측
-# DataFrame 형태로 제공해야 함 (X와 동일한 컬럼 순서)
-test_data = pd.DataFrame({
-    'Lagging_Current_Reactive.Power_kVarh': [2.95],
-    'Leading_Current_Reactive_Power_kVarh': [0],
-    'CO2(tCO2)': [0],
-    'Lagging_Current_Power_Factor': [73.21],
-    'Leading_Current_Power_Factor': [100],
-    'NSM': [900],
-    'WeekStatus': ['Weekday'],  # 범주형: 실제 문자열 값
-    'Day_of_week': ['Monday'],  # 범주형: 실제 문자열 값
-    'Load_Type': ['Light_Load']  # 범주형: 실제 문자열 값
-})
-
-# 파이프라인이 자동으로 전처리(one-hot encoding 포함) 수행
-predicted_usage = steel_model.predict(test_data)
-print(f"Predicted Usage: {predicted_usage[0]}")
