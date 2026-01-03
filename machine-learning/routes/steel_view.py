@@ -7,7 +7,7 @@ import pandas as pd
 bp = Blueprint('steel', __name__, url_prefix='/steel')
 
 # 모델 로드
-steel_model = joblib.load('model/steel_industry_model.pkl')
+steel_model = joblib.load('models/steel_industry_model.pkl')
 
 # Feature Importance
 @bp.route("/importance", methods=["GET"])

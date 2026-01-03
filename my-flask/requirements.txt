@@ -1,0 +1,6 @@
+Flask
+pymysql
+numpy
+joblib
+xgboost
+scikit-learn
