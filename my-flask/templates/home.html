@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS 활용 웹디자인 연습</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="inner">
+            <img class="logo-img" src="{{ url_for('static', filename='img/logo.png') }}" alt="logo">
+            <div>
+                <span class="menu-item">웹디자인</span>
+                <span class="menu-item">웹퍼블리싱</span>
+                <span class="menu-item">웹호스팅</span>
+                <span class="menu-item">AI모델</span>
+                <span class="menu-item">데이터분석</span>
+                <span class="menu-item">데이터베이스</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main">
+        <img class="main-img" src="{{ url_for('static', filename='img/bg.jpg') }}" alt="bg">
+        <div class="overlay">
+            <div class="inner">
+                <h1>안녕하세요</h1>
+                <p>웹퍼블리싱 연습 중입니다.</p>
+                <p>머신러닝, 데이터분석, DB</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <img class="footer-img" src="{{ url_for('static', filename='img/logo-icon.png') }}" alt="logo-icon">
+    </footer>
+</body>
+
+</html>
