@@ -23,7 +23,7 @@ def predict_iris():
         }), 400
 
     # 임의의 값 예측
-    test_data = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
+    test_data = np.array([[float(sepal_length), float(sepal_width), float(petal_length), float(petal_width)]])
     predict_class = iris_model.predict(test_data)
 
     class_names = ['setosa', 'versicolor', 'virginica']
