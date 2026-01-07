@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 import joblib
 import numpy as np
 from db import get_conn
@@ -50,3 +50,7 @@ def predict_iris():
             "message": "예측 실패",
             "error": str(e)
         }), 500
+
+@bp.route("/iris", methods=['GET'])
+def iris():
+    return render_template("iris.html")
