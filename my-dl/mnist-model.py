@@ -2,6 +2,8 @@ from tensorflow.keras.datasets import mnist
 from tensorflow.keras import models, layers
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
+import cv2
 
 # 데이터 불러오기
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
@@ -47,10 +49,24 @@ print('===모델 평가 결과==')
 model.evaluate(X_train, Y_train, verbose=2)
 model.summary() #모델 설명 요약본
 
-# 첫 번째 X_train 데이터로 예측
-first_prediction = model.predict(X_train[0:1])  # 첫 번째 데이터만 사용
-print("첫 번째 데이터에 대한 예측 결과 (확률 분포):", first_prediction)
+# # 첫 번째 X_train 데이터로 예측
+# first_prediction = model.predict(X_train[0:1])  # 첫 번째 데이터만 사용
+# print("첫 번째 데이터에 대한 예측 결과 (확률 분포):", first_prediction)
 
-# 가장 높은 확률을 가진 클래스 확인
-predicted_class = np.argmax(first_prediction)  # 확률이 가장 높은 클래스 인덱스
-print("첫 번째 데이터에 대한 예측 클래스:", predicted_class)
+# # 가장 높은 확률을 가진 클래스 확인
+# predicted_class = np.argmax(first_prediction)  # 확률이 가장 높은 클래스 인덱스
+# print("첫 번째 데이터에 대한 예측 클래스:", predicted_class)
+
+# 모델 저장
+model.save('models/mnist_model.keras')
+
+# 모델 로드
+loaded_model = tf.keras.models.load_model('models/mnist_model.keras')
+
+# 임의의 이미지 예측 - png 파일을 이미지로 불러와 예측
+image = cv2.imread('test1.png', cv2.IMREAD_GRAYSCALE)
+image = cv2.resize(image, (28, 28))
+image = image.reshape(1, 28, 28, 1)
+prediction = loaded_model.predict(image)
+predicted_class = np.argmax(prediction)
+print("예측된 클래스:", predicted_class)    
