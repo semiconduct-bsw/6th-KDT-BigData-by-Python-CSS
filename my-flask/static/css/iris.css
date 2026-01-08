@@ -30,7 +30,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 480px;
+    max-width: 1000px;
     padding: 2.5rem;
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
@@ -119,33 +119,81 @@ h1 {
     transform: translateY(0);
 }
 
+.content-wrapper {
+    display: flex;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+.form-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.result-section {
+    flex: 1;
+    display: flex;
+}
+
 .result-area {
-    margin-top: 2rem;
-    padding: 1.5rem;
+    width: 100%;
+    padding: 2rem;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 16px;
     border: 1px solid var(--glass-border);
-    display: none;
-    /* Hidden by default */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    animation: slideUp 0.5s ease-out;
+    transition: all 0.3s ease;
 }
 
-.result-area.show {
-    display: block;
+.result-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 15px rgba(79, 70, 229, 0.2));
 }
 
 .result-title {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--text-muted);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .result-value {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.result-area.active {
+    background: rgba(79, 70, 229, 0.05);
+    border-color: rgba(79, 70, 229, 0.2);
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.1);
+}
+
+.result-area.active .result-value {
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--success);
+    background: linear-gradient(to right, #34d399, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: 0.5rem;
 }
+
+.result-area.active .result-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 25px rgba(79, 70, 229, 0.4));
+}
+
+
 
 @keyframes fadeIn {
     from {
@@ -172,9 +220,18 @@ h1 {
 }
 
 /* Responsive adjustments */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .container {
         padding: 1.5rem;
         margin: 1rem;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .result-area {
+        min-height: 200px;
     }
 }

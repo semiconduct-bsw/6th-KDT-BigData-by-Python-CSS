@@ -18,7 +18,9 @@ $(document).ready(function () {
             }),
             success: function (response) {
                 if (response.success) {
-                    $('#result').addClass('show');
+                    $('#result').addClass('active');
+                    $('.result-icon').text('🌸');
+                    $('.result-title').text('예측 완료');
                     $('#resultValue').text(response["예측된 클래스 종류"]);
                 } else {
                     alert(response.message);
