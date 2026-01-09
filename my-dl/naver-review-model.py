@@ -11,7 +11,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
 import pickle
 
-
 # 1. 데이터 로드
 def load_data():
     train_data = pd.read_csv("data/nsmc-master/ratings_train.txt", sep='\t').dropna()
@@ -63,8 +62,6 @@ def build_model(input_dim, output_dim=128, input_length=100):
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     return model
 
-
-
 # 5. 감성 예측 함수
 def predict_sentiment(model, tokenizer, text, max_len=100):
     tagger = get_tagger()
@@ -73,9 +70,6 @@ def predict_sentiment(model, tokenizer, text, max_len=100):
     padded_sequence = pad_sequences(sequence, maxlen=max_len)
     prediction = model.predict(padded_sequence)
     return "긍정" if prediction > 0.5 else "부정"
-
-
-
 
 # 6. 메인 실행 코드
 if __name__ == "__main__":
