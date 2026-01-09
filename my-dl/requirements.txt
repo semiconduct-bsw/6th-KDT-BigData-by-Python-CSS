@@ -1,0 +1,9 @@
+Flask
+pymysql
+numpy
+joblib
+xgboost
+scikit-learn
+tensorflow
+konlpy
+mecab-python3
