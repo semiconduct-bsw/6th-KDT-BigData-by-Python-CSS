@@ -14,7 +14,7 @@ def load_and_preprocess_image(img_path):
     return img_array
 
 # 테스트 이미지 경로
-img_path = 'cat-dog/train/dogs/dog.20.jpg'
+img_path = 'data/cat-dog/train/dogs/dog.20.jpg'
 
 # 이미지 처리 및 예측
 preprocessed_img = load_and_preprocess_image(img_path)
